@@ -43,7 +43,7 @@ namespace PulseMute
                 titleBrand.TextAlign = ContentAlignment.MiddleLeft;
                 titleBrand.SetBounds(44, 4, 180, 30);
 
-                Button closeWindowButton = new SilenceActionButton();
+                Button closeWindowButton = new PulseMuteActionButton();
                 closeWindowButton.Text = "\uE711";
                 closeWindowButton.Font = new Font("Segoe Fluent Icons", 10F, FontStyle.Regular);
                 closeWindowButton.SetBounds(618, 4, 32, 30);
@@ -104,7 +104,7 @@ namespace PulseMute
                 versionLabel.SetBounds(16, 11, 356, 18);
                 versionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
 
-                Button doneButton = CreateSilenceActionButton("Done", new Point(388, 6));
+                Button doneButton = CreatePulseMuteActionButton("Done", new Point(388, 6));
                 doneButton.Size = new Size(76, 28);
                 doneButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
                 doneButton.Click += delegate { dialog.Close(); };
@@ -122,11 +122,11 @@ namespace PulseMute
                 List<Label> primaryLabels = new List<Label>();
                 List<Label> stateLabels = new List<Label>();
                 List<ToggleSwitch> toggles = new List<ToggleSwitch>();
-                List<SilenceComboBox> comboBoxes = new List<SilenceComboBox>();
+                List<PulseMuteComboBox> comboBoxes = new List<PulseMuteComboBox>();
                 List<Button> actionButtons = new List<Button>();
                 List<Panel> separators = new List<Panel>();
                 List<Button> navigationButtons = new List<Button>();
-                List<SilenceCardPanel> cards = new List<SilenceCardPanel>();
+                List<PulseMuteCardPanel> cards = new List<PulseMuteCardPanel>();
 
                 Panel generalPage = CreateSidebarSettingsPage("General", primaryLabels);
                 pages.Add("General", generalPage);
@@ -161,7 +161,7 @@ namespace PulseMute
                 Label keyOneLabel = AddPageLabel(hotkeysPage, primaryLabels, "Key 1", 28, 166);
                 Label keyOneState = AddPageState(hotkeysPage, stateLabels, 28, 188);
                 keyOneState.Text = "Primary assignment";
-                Button keyOneButton = CreateSilenceActionButton(CurrentShortcutText(1), new Point(330, 164));
+                Button keyOneButton = CreatePulseMuteActionButton(CurrentShortcutText(1), new Point(330, 164));
                 keyOneButton.Size = new Size(208, 34);
                 keyOneButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 hotkeysPage.Controls.Add(keyOneButton);
@@ -171,7 +171,7 @@ namespace PulseMute
                 Label keyTwoLabel = AddPageLabel(hotkeysPage, primaryLabels, "Key 2", 28, 242);
                 Label keyTwoState = AddPageState(hotkeysPage, stateLabels, 28, 264);
                 keyTwoState.Text = "Secondary assignment";
-                Button keyTwoButton = CreateSilenceActionButton(CurrentShortcutText(2), new Point(330, 240));
+                Button keyTwoButton = CreatePulseMuteActionButton(CurrentShortcutText(2), new Point(330, 240));
                 keyTwoButton.Size = new Size(208, 34);
                 keyTwoButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 hotkeysPage.Controls.Add(keyTwoButton);
@@ -181,7 +181,7 @@ namespace PulseMute
                 pages.Add("Audio", audioPage);
 
                 Label microphoneLabel = AddPageLabel(audioPage, primaryLabels, "Microphone", 28, 88);
-                SilenceComboBox microphoneBox = CreatePageComboBox(28, 116, 510);
+                PulseMuteComboBox microphoneBox = CreatePageComboBox(28, 116, 510);
                 audioPage.Controls.Add(microphoneBox);
                 comboBoxes.Add(microphoneBox);
 
@@ -203,7 +203,7 @@ namespace PulseMute
                 ToggleSwitch soundFeedbackToggle = AddPageToggle(audioPage, toggles, 510, 190, soundFeedbackEnabled);
 
                 Label soundPresetLabel = AddPageLabel(audioPage, primaryLabels, "Sound style", 28, 250);
-                SilenceComboBox soundPresetBox = CreatePageComboBox(28, 276, 510);
+                PulseMuteComboBox soundPresetBox = CreatePageComboBox(28, 276, 510);
                 audioPage.Controls.Add(soundPresetBox);
                 comboBoxes.Add(soundPresetBox);
                 int soundPresetIndex = 0;
@@ -225,7 +225,7 @@ namespace PulseMute
                 soundVolumeIcon.SetBounds(28, 382, 22, 28);
                 audioPage.Controls.Add(soundVolumeIcon);
                 primaryLabels.Add(soundVolumeIcon);
-                SilenceSlider soundVolumeSlider = new SilenceSlider();
+                PulseMuteSlider soundVolumeSlider = new PulseMuteSlider();
                 soundVolumeSlider.Minimum = 0;
                 soundVolumeSlider.Maximum = 100;
                 soundVolumeSlider.Value = Math.Max(0, Math.Min(100, soundVolume));
@@ -233,7 +233,7 @@ namespace PulseMute
                 soundVolumeSlider.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                 audioPage.Controls.Add(soundVolumeSlider);
 
-                Button soundSettingsButton = CreateSilenceActionButton("Windows sound settings", new Point(28, 446));
+                Button soundSettingsButton = CreatePulseMuteActionButton("Windows sound settings", new Point(28, 446));
                 soundSettingsButton.Size = new Size(190, 32);
                 audioPage.Controls.Add(soundSettingsButton);
                 actionButtons.Add(soundSettingsButton);
@@ -244,7 +244,7 @@ namespace PulseMute
                 Label controllerLabel = AddPageLabel(controllerPage, primaryLabels, "PlayStation controller", 28, 88);
                 Label controllerState = AddPageState(controllerPage, stateLabels, 28, 110);
                 controllerState.SetBounds(28, 110, 320, 18);
-                Button controllerScanButton = CreateSilenceActionButton("Rescan", new Point(412, 88));
+                Button controllerScanButton = CreatePulseMuteActionButton("Rescan", new Point(412, 88));
                 controllerScanButton.Size = new Size(126, 32);
                 controllerScanButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 controllerPage.Controls.Add(controllerScanButton);
@@ -266,7 +266,7 @@ namespace PulseMute
 
                 Label customizationLabel = AddPageLabel(customizationPage, primaryLabels, "Interface colors", 28, 166);
                 Label customizationState = AddPageState(customizationPage, stateLabels, 28, 188);
-                Button customizeButton = CreateSilenceActionButton("Customize", new Point(398, 164));
+                Button customizeButton = CreatePulseMuteActionButton("Customize", new Point(398, 164));
                 customizeButton.Size = new Size(140, 34);
                 customizeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 customizationPage.Controls.Add(customizeButton);
@@ -275,7 +275,7 @@ namespace PulseMute
                 Label muteDesignLabel = AddPageLabel(customizationPage, primaryLabels, "Mute control", 28, 238);
                 Label muteDesignState = AddPageState(customizationPage, stateLabels, 28, 260);
                 muteDesignState.Text = "Button visual";
-                SilenceComboBox muteDesignBox = CreatePageComboBox(330, 242, 208);
+                PulseMuteComboBox muteDesignBox = CreatePageComboBox(330, 242, 208);
                 muteDesignBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 string[] muteDesigns = { "Classic circle", "Microphone tile", "Wave badge", "Record button", "Power ring", "Red/green mic" };
                 foreach (string design in muteDesigns)
@@ -287,7 +287,7 @@ namespace PulseMute
                 Label logoStyleLabel = AddPageLabel(customizationPage, primaryLabels, "App logo", 28, 322);
                 Label logoStyleState = AddPageState(customizationPage, stateLabels, 28, 344);
                 logoStyleState.Text = "Window, tray and About";
-                SilenceComboBox logoStyleBox = CreatePageComboBox(330, 326, 208);
+                PulseMuteComboBox logoStyleBox = CreatePageComboBox(330, 326, 208);
                 logoStyleBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 string[] logoStyles = { "Muted circle", "Long shadow", "Rounded square", "Outline mic" };
                 foreach (string style in logoStyles)
@@ -317,7 +317,7 @@ namespace PulseMute
                 ToggleSwitch hotkeyStripToggle = AddPageToggle(developerContent, toggles, 510, 88, hotkeyStripAboveCredit);
 
                 Label olderVersionLabel = AddPageLabel(developerContent, primaryLabels, "Older version", 28, 152);
-                SilenceComboBox olderVersionBox = CreatePageComboBox(28, 178, 382);
+                PulseMuteComboBox olderVersionBox = CreatePageComboBox(28, 178, 382);
                 developerContent.Controls.Add(olderVersionBox);
                 comboBoxes.Add(olderVersionBox);
                 List<ArchivedVersionInfo> archivedVersions = DiscoverArchivedVersions();
@@ -326,7 +326,7 @@ namespace PulseMute
                 if (olderVersionBox.Items.Count > 0)
                     olderVersionBox.SelectedIndex = 0;
 
-                Button openVersionButton = CreateSilenceActionButton("Open", new Point(420, 178));
+                Button openVersionButton = CreatePulseMuteActionButton("Open", new Point(420, 178));
                 openVersionButton.Size = new Size(118, 30);
                 openVersionButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 developerContent.Controls.Add(openVersionButton);
@@ -545,7 +545,7 @@ namespace PulseMute
                         toggle.AnimationsEnabled = animationsEnabled;
                         toggle.Invalidate();
                     }
-                    foreach (SilenceComboBox comboBox in comboBoxes)
+                    foreach (PulseMuteComboBox comboBox in comboBoxes)
                     {
                         comboBox.BackColor = surface;
                         comboBox.ForeColor = foreground;
@@ -563,7 +563,7 @@ namespace PulseMute
 
                     foreach (Panel separator in separators)
                         separator.BackColor = border;
-                    foreach (SilenceCardPanel card in cards)
+                    foreach (PulseMuteCardPanel card in cards)
                     {
                         card.BackColor = surface;
                         card.SurfaceColor = surface;
@@ -579,14 +579,14 @@ namespace PulseMute
                     foreach (Button navigationButton in navigationButtons)
                     {
                         bool selected = string.Equals(Convert.ToString(navigationButton.Tag), activePage, StringComparison.OrdinalIgnoreCase);
-                        SilenceNavigationButton silenceNavigation = navigationButton as SilenceNavigationButton;
-                        if (silenceNavigation != null)
+                        PulseMuteNavigationButton pulseNavigation = navigationButton as PulseMuteNavigationButton;
+                        if (pulseNavigation != null)
                         {
-                            silenceNavigation.Selected = selected;
-                            silenceNavigation.AccentColor = accent;
-                            silenceNavigation.SurfaceColor = surface;
-                            silenceNavigation.NormalTextColor = secondary;
-                            silenceNavigation.Invalidate();
+                            pulseNavigation.Selected = selected;
+                            pulseNavigation.AccentColor = accent;
+                            pulseNavigation.SurfaceColor = surface;
+                            pulseNavigation.NormalTextColor = secondary;
+                            pulseNavigation.Invalidate();
                         }
                     }
 
@@ -890,22 +890,22 @@ namespace PulseMute
             return separator;
         }
 
-        private static SilenceComboBox CreatePageComboBox(int x, int y, int width)
+        private static PulseMuteComboBox CreatePageComboBox(int x, int y, int width)
         {
-            SilenceComboBox comboBox = new SilenceComboBox();
+            PulseMuteComboBox comboBox = new PulseMuteComboBox();
             comboBox.SetBounds(x, y, width, 32);
             comboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             return comboBox;
         }
 
-        private static SilenceCardPanel AddSettingsCard(
+        private static PulseMuteCardPanel AddSettingsCard(
             Panel page,
-            List<SilenceCardPanel> cards,
+            List<PulseMuteCardPanel> cards,
             int y,
             int height,
             params Control[] controls)
         {
-            SilenceCardPanel card = new SilenceCardPanel();
+            PulseMuteCardPanel card = new PulseMuteCardPanel();
             int cardWidth = Math.Max(260, page.ClientSize.Width - 44);
             card.SetBounds(22, y, cardWidth, height);
             card.BackColor = Color.FromArgb(39, 36, 38);
@@ -926,7 +926,7 @@ namespace PulseMute
                     && (control.Anchor & AnchorStyles.Left) == 0;
                 if (rightOnly)
                     relativeX = card.Width - control.Width - 16;
-                if ((control is SilenceComboBox || control is SilenceSlider) && !rightOnly)
+                if ((control is PulseMuteComboBox || control is PulseMuteSlider) && !rightOnly)
                     control.Width = Math.Max(60, card.Width - relativeX - 16 - reservedRight);
                 else if (control is Label && (control.Anchor & AnchorStyles.Right) != 0)
                     control.Width = Math.Max(40, card.Width - relativeX - 16 - reservedRight);
@@ -936,7 +936,7 @@ namespace PulseMute
             }
             foreach (Control control in controls)
             {
-                if (control is Button || control is CheckBox || control is SilenceComboBox || control is SilenceSlider)
+                if (control is Button || control is CheckBox || control is PulseMuteComboBox || control is PulseMuteSlider)
                     control.BringToFront();
             }
             page.Controls.Add(card);
@@ -947,7 +947,7 @@ namespace PulseMute
 
         private static Button CreateSidebarNavigationButton(string text, string icon, int y)
         {
-            SilenceNavigationButton button = new SilenceNavigationButton();
+            PulseMuteNavigationButton button = new PulseMuteNavigationButton();
             button.Text = text;
             button.IconGlyph = icon;
             button.Tag = text;
@@ -957,9 +957,9 @@ namespace PulseMute
             return button;
         }
 
-        private static Button CreateSilenceActionButton(string text, Point location)
+        private static Button CreatePulseMuteActionButton(string text, Point location)
         {
-            SilenceActionButton button = new SilenceActionButton();
+            PulseMuteActionButton button = new PulseMuteActionButton();
             button.Text = text;
             button.Location = location;
             button.Size = new Size(96, 30);
@@ -1010,14 +1010,14 @@ namespace PulseMute
 
         private static void StyleSidebarActionButton(Button button, Color surface, Color foreground, Color border, bool darkTheme)
         {
-            SilenceActionButton silenceButton = button as SilenceActionButton;
-            if (silenceButton != null)
+            PulseMuteActionButton pulseButton = button as PulseMuteActionButton;
+            if (pulseButton != null)
             {
-                silenceButton.SurfaceColor = surface;
-                silenceButton.TextColor = foreground;
-                silenceButton.BorderColor = border;
-                silenceButton.HoverColor = darkTheme ? Color.FromArgb(54, 49, 52) : Color.FromArgb(234, 232, 234);
-                silenceButton.Invalidate();
+                pulseButton.SurfaceColor = surface;
+                pulseButton.TextColor = foreground;
+                pulseButton.BorderColor = border;
+                pulseButton.HoverColor = darkTheme ? Color.FromArgb(54, 49, 52) : Color.FromArgb(234, 232, 234);
+                pulseButton.Invalidate();
                 return;
             }
             button.BackColor = surface;
@@ -1030,7 +1030,7 @@ namespace PulseMute
 
     }
 
-    internal sealed class SilenceComboBox : Control
+    internal sealed class PulseMuteComboBox : Control
     {
         private readonly List<object> items = new List<object>();
         private int selectedIndex = -1;
@@ -1058,7 +1058,7 @@ namespace PulseMute
             get { return selectedIndex >= 0 && selectedIndex < items.Count ? items[selectedIndex] : null; }
         }
 
-        public SilenceComboBox()
+        public PulseMuteComboBox()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             Cursor = Cursors.Hand;
@@ -1088,7 +1088,7 @@ namespace PulseMute
             menu.ShowImageMargin = false;
             menu.BackColor = BackColor;
             menu.ForeColor = ForeColor;
-            menu.Renderer = new SilenceMenuRenderer(BackColor, ForeColor, HighlightColor);
+            menu.Renderer = new PulseMuteMenuRenderer(BackColor, ForeColor, HighlightColor);
             for (int index = 0; index < items.Count; index++)
             {
                 int itemIndex = index;
@@ -1145,7 +1145,7 @@ namespace PulseMute
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.Clear(Parent == null ? BackColor : Parent.BackColor);
             Rectangle bounds = new Rectangle(0, 0, Width - 1, Height - 1);
-            using (GraphicsPath path = SilenceDrawing.RoundedPath(bounds, 5))
+            using (GraphicsPath path = PulseMuteDrawing.RoundedPath(bounds, 5))
             using (SolidBrush brush = new SolidBrush(BackColor))
             using (Pen pen = new Pen(Focused ? HighlightColor : Color.FromArgb(78, 73, 77)))
             {
@@ -1165,17 +1165,17 @@ namespace PulseMute
         }
     }
 
-    internal sealed class SilenceMenuRenderer : ToolStripProfessionalRenderer
+    internal sealed class PulseMuteMenuRenderer : ToolStripProfessionalRenderer
     {
-        public SilenceMenuRenderer(Color background, Color foreground, Color accent)
-            : base(new SilenceColorTable(background, foreground, accent)) { }
+        public PulseMuteMenuRenderer(Color background, Color foreground, Color accent)
+            : base(new PulseMuteColorTable(background, foreground, accent)) { }
     }
 
-    internal sealed class SilenceColorTable : ProfessionalColorTable
+    internal sealed class PulseMuteColorTable : ProfessionalColorTable
     {
         private readonly Color background;
         private readonly Color accent;
-        public SilenceColorTable(Color background, Color foreground, Color accent)
+        public PulseMuteColorTable(Color background, Color foreground, Color accent)
         {
             this.background = background;
             this.accent = accent;
@@ -1189,7 +1189,7 @@ namespace PulseMute
         public override Color ImageMarginGradientEnd { get { return background; } }
     }
 
-    internal sealed class SilenceSlider : Control
+    internal sealed class PulseMuteSlider : Control
     {
         private int minimum;
         private int maximum = 100;
@@ -1214,7 +1214,7 @@ namespace PulseMute
             }
         }
 
-        public SilenceSlider()
+        public PulseMuteSlider()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             Cursor = Cursors.Hand;
@@ -1260,7 +1260,7 @@ namespace PulseMute
         }
     }
 
-    internal sealed class SilenceNavigationButton : Button
+    internal sealed class PulseMuteNavigationButton : Button
     {
         public string IconGlyph = string.Empty;
         public bool Selected;
@@ -1269,7 +1269,7 @@ namespace PulseMute
         public Color NormalTextColor = Color.FromArgb(190, 187, 191);
         private bool hovered;
 
-        public SilenceNavigationButton()
+        public PulseMuteNavigationButton()
         {
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
@@ -1286,7 +1286,7 @@ namespace PulseMute
             Rectangle bounds = new Rectangle(0, 0, Width - 1, Height - 1);
             if (Selected || hovered)
             {
-                using (GraphicsPath path = SilenceDrawing.RoundedPath(bounds, 6))
+                using (GraphicsPath path = PulseMuteDrawing.RoundedPath(bounds, 6))
                 using (SolidBrush brush = new SolidBrush(SurfaceColor))
                     e.Graphics.FillPath(brush, path);
             }
@@ -1301,12 +1301,12 @@ namespace PulseMute
         }
     }
 
-    internal sealed class SilenceCardPanel : Panel
+    internal sealed class PulseMuteCardPanel : Panel
     {
         public Color SurfaceColor = Color.FromArgb(39, 36, 38);
         public Color BorderColor = Color.FromArgb(61, 57, 60);
 
-        public SilenceCardPanel()
+        public PulseMuteCardPanel()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             Padding = new Padding(1);
@@ -1317,7 +1317,7 @@ namespace PulseMute
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.Clear(Parent == null ? SurfaceColor : Parent.BackColor);
             Rectangle bounds = new Rectangle(0, 0, Width - 1, Height - 1);
-            using (GraphicsPath path = SilenceDrawing.RoundedPath(bounds, 7))
+            using (GraphicsPath path = PulseMuteDrawing.RoundedPath(bounds, 7))
             using (SolidBrush brush = new SolidBrush(SurfaceColor))
             using (Pen pen = new Pen(BorderColor))
             {
@@ -1328,7 +1328,7 @@ namespace PulseMute
         }
     }
 
-    internal sealed class SilenceActionButton : Button
+    internal sealed class PulseMuteActionButton : Button
     {
         public Color SurfaceColor = Color.FromArgb(43, 39, 41);
         public Color HoverColor = Color.FromArgb(54, 49, 52);
@@ -1336,7 +1336,7 @@ namespace PulseMute
         public Color BorderColor = Color.FromArgb(61, 57, 60);
         private bool hovered;
 
-        public SilenceActionButton()
+        public PulseMuteActionButton()
         {
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
@@ -1352,7 +1352,7 @@ namespace PulseMute
             e.Graphics.Clear(Parent == null ? SurfaceColor : Parent.BackColor);
             Rectangle bounds = new Rectangle(0, 0, Width - 1, Height - 1);
             Color fill = Enabled ? (hovered ? HoverColor : SurfaceColor) : Color.FromArgb(35, 33, 34);
-            using (GraphicsPath path = SilenceDrawing.RoundedPath(bounds, 6))
+            using (GraphicsPath path = PulseMuteDrawing.RoundedPath(bounds, 6))
             using (SolidBrush brush = new SolidBrush(fill))
             using (Pen pen = new Pen(BorderColor))
             {
@@ -1366,7 +1366,7 @@ namespace PulseMute
         }
     }
 
-    internal static class SilenceDrawing
+    internal static class PulseMuteDrawing
     {
         public static GraphicsPath RoundedPath(Rectangle bounds, int radius)
         {

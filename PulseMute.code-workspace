@@ -1,0 +1,53 @@
+{
+  "folders": [
+    {
+      "name": "PulseMute Main",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/bin": true,
+      "**/obj": true,
+      "**/dist": true
+    },
+    "search.exclude": {
+      "Main source/Version Archive": true
+    },
+    "editor.formatOnSave": false,
+    "files.encoding": "utf8"
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build PulseMute Main",
+        "type": "shell",
+        "command": "powershell",
+        "args": [
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "${workspaceFolder}\\Main source\\build.ps1"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "Test PulseMute Main",
+        "type": "shell",
+        "command": "powershell",
+        "args": [
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "${workspaceFolder}\\Main source\\test-controller.ps1"
+        ],
+        "problemMatcher": "$msCompile"
+      }
+    ]
+  }
+}

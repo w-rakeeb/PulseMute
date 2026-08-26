@@ -2978,7 +2978,7 @@ namespace PulseMute
             if (name == "Beta 26.1.0.6-beta") return "Introduced responsive sidebar Settings with focused category pages.";
             if (name == "Beta 26.1.0.7-beta") return "Expanded sound feedback, volume control, animations, and professional logo preview.";
             if (name == "Beta 26.1.0.8-beta") return "Promoted the professional logo, removed rounded-control experiments, and hardened sidebar Settings.";
-            if (name == "Beta 26.1.0.9-beta") return "Redesigned native Settings with Silence-inspired navigation, cards, controls, and animation.";
+            if (name == "Beta 26.1.0.9-beta") return "Redesigned Settings with PulseMute navigation, cards, controls, and animation.";
             if (name == "Beta 26.1.0.10-beta") return "Unified front and Settings palettes with customizable Settings sidebar and border colors.";
             if (name == "Beta 26.1.0.11-beta") return "Added a themed HEX and RGB color editor with copy, paste, presets, and live preview.";
             if (name == "Beta 26.1.0.12-beta") return "Fixed custom dropdown menu lifetime and the disposed ContextMenuStrip error.";

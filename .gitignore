@@ -3,6 +3,6 @@ obj/
 dist/
 *.pdb
 *.user
-.vs/
 *.suo
+.vs/
 

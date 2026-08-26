@@ -6,12 +6,6 @@ Owner: [w-rakeeb](https://github.com/w-rakeeb) / Ra Kib
 
 PulseMute Main `26.1.0.8-stable` is the active daily-use Stable channel.
 
-![PulseMute logo](Main%20source/PulseMute-professional-256.png)
-
-## Download
-
-Download and run [`PulseMute Main.exe`](./PulseMute%20Main.exe). The portable app does not require installation.
-
 ## Features
 
 - Toggle the default Windows communication microphone.
@@ -78,16 +72,14 @@ Download and run [`PulseMute Main.exe`](./PulseMute%20Main.exe). The portable ap
 
 ## Files
 
-- `Main source/Program.cs` contains the main Windows Forms application source.
-- `Main source/SidebarSettings.cs` contains the modern sidebar Settings interface.
-- `Main source/PulseMute.csproj` is the modern .NET project file.
-- `Main source/build.ps1` compiles the app on Windows using the built-in .NET Framework C# compiler.
-- `Main source/test-controller.ps1` runs synthetic protocol tests and a read-only hardware check when a controller is connected.
-- `Main source/Dependencies` contains the required HidSharp runtime and its Apache 2.0 license.
-- `PulseMute.code-workspace` opens the complete project in VS Code with build and test tasks.
-- `FILE_GUIDE.md` explains every active file in simple language.
-- `Updates` contains the complete Stable release history and validation notes.
-- `DETAILS.md` provides a compact technical feature summary.
+- `Program.cs` contains the full Windows Forms application source.
+- `SidebarSettings.cs` contains the modern Settings window and its custom controls.
+- `PulseMute.csproj` is the modern .NET project file.
+- `build.ps1` compiles the app on Windows using the built-in .NET Framework C# compiler.
+- `test-controller.ps1` runs synthetic protocol tests and a read-only hardware check when a controller is connected.
+- `Dependencies` contains the HidSharp 2.6.4 package and its Apache 2.0 license.
+- `../PulseMute.code-workspace` opens the complete project in VS Code with build and test tasks.
+- `../FILE_GUIDE.md` explains every active file in simple language.
 - `LICENSE` contains the project license.
 
 ## Build
@@ -97,14 +89,13 @@ Download and run [`PulseMute Main.exe`](./PulseMute%20Main.exe). The portable ap
 Open PowerShell in the repository folder and run:
 
 ```powershell
-cd '.\Main source'
 .\build.ps1
 ```
 
-The compiled app will be written to the repository root:
+The compiled app will be written beside the `Main source` folder:
 
 ```text
-PulseMute Main.exe
+..\PulseMute Main.exe
 ```
 
 ### Option 2: Build with the .NET SDK
@@ -112,14 +103,8 @@ PulseMute Main.exe
 If you have the .NET SDK installed:
 
 ```powershell
-dotnet publish '.\Main source\PulseMute.csproj' -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o .\dist
+dotnet publish .\PulseMute.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o .\dist
 ```
-
-## Validation
-
-- Stable `26.1.0.8-stable` builds successfully with the included script.
-- The automated suite passes 570 input, UI, branding, archive, and release-isolation assertions.
-- Physical DualSense hardware testing runs automatically when a supported controller is connected.
 
 ## Usage
 

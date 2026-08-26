@@ -45,6 +45,7 @@ Channel: Stable daily-use build
 - Preserved the complete `26.1.0.7-stable` source, executable, and update history.
 - Corrected the primary identity to the supplied `#A02A39` circular muted-microphone SVG.
 - Updated the executable, window, taskbar, tray, Settings, and About artwork to the corrected identity.
+- Finalized active source ownership, added VS Code project files and a plain-language file guide, and passed 575 regression assertions.
 
 ## Now
 

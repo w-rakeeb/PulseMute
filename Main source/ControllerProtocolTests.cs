@@ -261,7 +261,7 @@ namespace PulseMute
             page.Controls.Add(state);
             page.Controls.Add(toggle);
 
-            System.Collections.Generic.List<SilenceCardPanel> cards = new System.Collections.Generic.List<SilenceCardPanel>();
+            System.Collections.Generic.List<PulseMuteCardPanel> cards = new System.Collections.Generic.List<PulseMuteCardPanel>();
             System.Reflection.MethodInfo addCard = typeof(MainForm).GetMethod("AddSettingsCard", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
             Assert(addCard != null, "Compact Settings card layout helper is missing.");
             addCard.Invoke(null, new object[] { page, cards, 76, 58, new System.Windows.Forms.Control[] { title, state, toggle } });
@@ -463,11 +463,11 @@ namespace PulseMute
 
         private static void TestSettingsDropDownLifetime()
         {
-            SilenceComboBox comboBox = new SilenceComboBox();
+            PulseMuteComboBox comboBox = new PulseMuteComboBox();
             comboBox.Items.Add("First");
             comboBox.Items.Add("Second");
 
-            System.Reflection.MethodInfo createMenu = typeof(SilenceComboBox).GetMethod(
+            System.Reflection.MethodInfo createMenu = typeof(PulseMuteComboBox).GetMethod(
                 "CreateDropDownMenu",
                 System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             Assert(createMenu != null, "Settings dropdown menu factory is missing.");
@@ -493,16 +493,22 @@ namespace PulseMute
             string sourcePath = System.IO.Path.Combine(appDirectory, "Main source", "SidebarSettings.cs");
             string source = System.IO.File.ReadAllText(sourcePath);
             string programSource = System.IO.File.ReadAllText(System.IO.Path.Combine(appDirectory, "Main source", "Program.cs"));
+            Assert(System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "PulseMute.code-workspace")), "VS Code workspace is missing.");
+            Assert(System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "PulseMute.sln")) &&
+                System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "FILE_GUIDE.md")), "Project organization guides are missing.");
             Assert(source.IndexOf("FormBorderStyle.None", StringComparison.Ordinal) >= 0, "Native Settings shell is not borderless.");
             Assert(source.IndexOf("ClientSize = new Size(660, 500)", StringComparison.Ordinal) >= 0, "Balanced Settings size is missing.");
             Assert(source.IndexOf("MinimumSize = new Size(600, 450)", StringComparison.Ordinal) >= 0, "Balanced Settings minimum size is missing.");
             Assert(source.IndexOf("sidebar.SetBounds(0, 38, 180, 462)", StringComparison.Ordinal) >= 0, "Balanced Settings sidebar dimensions are missing.");
             Assert(source.IndexOf("button.SetBounds(10, y, 160, 36)", StringComparison.Ordinal) >= 0, "Balanced navigation dimensions are missing.");
             Assert(source.IndexOf("CalculateSettingsLocation", StringComparison.Ordinal) >= 0, "Side placement helper is missing.");
-            Assert(source.IndexOf("SilenceNavigationButton", StringComparison.Ordinal) >= 0, "Silence-style navigation control is missing.");
-            Assert(source.IndexOf("SilenceCardPanel", StringComparison.Ordinal) >= 0, "Silence-style settings cards are missing.");
-            Assert(source.IndexOf("SilenceComboBox", StringComparison.Ordinal) >= 0, "Custom settings dropdown is missing.");
-            Assert(source.IndexOf("SilenceSlider", StringComparison.Ordinal) >= 0, "Custom settings slider is missing.");
+            Assert(source.IndexOf("PulseMuteNavigationButton", StringComparison.Ordinal) >= 0, "PulseMute navigation control is missing.");
+            Assert(source.IndexOf("PulseMuteCardPanel", StringComparison.Ordinal) >= 0, "PulseMute settings cards are missing.");
+            Assert(source.IndexOf("PulseMuteComboBox", StringComparison.Ordinal) >= 0, "Custom settings dropdown is missing.");
+            Assert(source.IndexOf("PulseMuteSlider", StringComparison.Ordinal) >= 0, "Custom settings slider is missing.");
+            Assert(source.IndexOf("PulseMuteActionButton", StringComparison.Ordinal) >= 0, "PulseMute action button is missing.");
+            Assert(source.IndexOf("PulseMuteMenuRenderer", StringComparison.Ordinal) >= 0, "PulseMute menu renderer is missing.");
+            Assert(source.IndexOf("PulseMuteDrawing", StringComparison.Ordinal) >= 0, "PulseMute drawing helper is missing.");
             Assert(source.IndexOf("SettingsBodyFont", StringComparison.Ordinal) >= 0, "Settings typography helper is missing.");
             Assert(source.IndexOf("26.1.0.8-stable", StringComparison.Ordinal) >= 0, "Settings version label is stale.");
             Assert(source.IndexOf("PulseMute Main", StringComparison.Ordinal) >= 0, "Stable Settings branding is missing.");
