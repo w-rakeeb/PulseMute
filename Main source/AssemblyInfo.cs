@@ -1,8 +1,8 @@
 using System.Reflection;
 
-[assembly: AssemblyTitle("PulseMute Main")]
-[assembly: AssemblyProduct("PulseMute Main")]
+[assembly: AssemblyTitle("PulseMute Beta")]
+[assembly: AssemblyProduct("PulseMute Beta")]
 [assembly: AssemblyCompany("Wrakeeb")]
-[assembly: AssemblyVersion("26.1.0.8")]
-[assembly: AssemblyFileVersion("26.1.0.8")]
-[assembly: AssemblyInformationalVersion("26.1.0.8-stable")]
+[assembly: AssemblyVersion("26.1.0.29")]
+[assembly: AssemblyFileVersion("26.1.0.29")]
+[assembly: AssemblyInformationalVersion("26.1.0.29-beta")]

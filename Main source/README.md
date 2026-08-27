@@ -4,7 +4,7 @@ PulseMute is a compact Windows microphone mute utility made by **Wrakeeb**.
 
 Owner: [w-rakeeb](https://github.com/w-rakeeb) / Ra Kib
 
-PulseMute Main `26.1.0.8-stable` is the active daily-use Stable channel.
+PulseMute Beta 26.1.0.29-beta is the active development and validation channel.
 
 ## Features
 
@@ -51,7 +51,7 @@ PulseMute Main `26.1.0.8-stable` is the active daily-use Stable channel.
 - Professional toggle switches with clear state text.
 - Minimal Fluent action icons and redesigned global hotkey control.
 - Settings stays above the main window when Always on Top is enabled.
-- Custom PulseMute frameless Settings window with compact icon navigation and responsive content.
+- PulseMute-owned frameless Settings window with compact icon navigation and responsive content.
 - Inter typography, dark neutral cards, PulseMute red accents, custom dropdowns, and a custom volume slider.
 - Eased animated page changes and toggle transitions, with an option to disable animations.
 - Buffered drawing and faster state refresh for smoother interface updates.
@@ -62,10 +62,10 @@ PulseMute Main `26.1.0.8-stable` is the active daily-use Stable channel.
 - Scroll-contained Developer cards and sharper Segoe UI Variable typography.
 - Fully padded Audio cards with a Fluent volume icon and correctly bounded slider.
 - Sharp source artwork and a multi-resolution Windows icon for clear rendering at compact sizes.
-- Opt-in Developer Mode with a picker for preserved Stable and legacy releases.
+- Opt-in Developer Mode with a picker for preserved Beta and legacy releases.
 - Older-version controls remain hidden until Developer Mode is enabled.
 - A compact Versions info field shows the selected release details below the picker.
-- Opening an archived release closes the current Stable app to prevent duplicate global hotkeys.
+- Opening an archived release closes the current Beta to prevent duplicate global hotkeys.
 - Remembers window size, position, and stay-on-top state.
 - System tray support.
 - Credit line: `made by Wrakeeb`.
@@ -73,13 +73,10 @@ PulseMute Main `26.1.0.8-stable` is the active daily-use Stable channel.
 ## Files
 
 - `Program.cs` contains the full Windows Forms application source.
-- `SidebarSettings.cs` contains the modern Settings window and its custom controls.
 - `PulseMute.csproj` is the modern .NET project file.
 - `build.ps1` compiles the app on Windows using the built-in .NET Framework C# compiler.
 - `test-controller.ps1` runs synthetic protocol tests and a read-only hardware check when a controller is connected.
 - `Dependencies` contains the HidSharp 2.6.4 package and its Apache 2.0 license.
-- `../PulseMute.code-workspace` opens the complete project in VS Code with build and test tasks.
-- `../FILE_GUIDE.md` explains every active file in simple language.
 - `LICENSE` contains the project license.
 
 ## Build
@@ -92,10 +89,10 @@ Open PowerShell in the repository folder and run:
 .\build.ps1
 ```
 
-The compiled app will be written beside the `Main source` folder:
+The compiled app will be written beside the `Full source` folder:
 
 ```text
-..\PulseMute Main.exe
+..\PulseMute Beta.exe
 ```
 
 ### Option 2: Build with the .NET SDK
@@ -108,7 +105,7 @@ dotnet publish .\PulseMute.csproj -c Release -r win-x64 --self-contained false -
 
 ## Usage
 
-1. Open `PulseMute Main.exe`.
+1. Open `PulseMute Beta.exe`.
 2. Click the large button to mute or unmute.
 3. Click either hotkey card to assign Key 1 or Key 2.
 4. Press one keyboard key or one DualSense button for each slot.

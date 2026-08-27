@@ -13,7 +13,7 @@ namespace PulseMute
         {
             using (Form dialog = new BufferedSettingsForm())
             {
-                dialog.Text = "PulseMute Main settings";
+                dialog.Text = "PulseMute Beta settings";
                 dialog.Icon = appIcon;
                 dialog.ClientSize = new Size(660, 500);
                 dialog.MinimumSize = new Size(600, 450);
@@ -38,7 +38,7 @@ namespace PulseMute
                 titleLogo.SetBounds(14, 8, 22, 22);
 
                 Label titleBrand = new Label();
-                titleBrand.Text = "PulseMute Main";
+                titleBrand.Text = "PulseMute Beta";
                 titleBrand.Font = SettingsBodyFont(9.5F, FontStyle.Bold);
                 titleBrand.TextAlign = ContentAlignment.MiddleLeft;
                 titleBrand.SetBounds(44, 4, 180, 30);
@@ -354,12 +354,12 @@ namespace PulseMute
                 appLogo.SetBounds(28, 88, 72, 72);
                 aboutPage.Controls.Add(appLogo);
 
-                Label aboutTitle = AddPageLabel(aboutPage, primaryLabels, "PulseMute Main", 116, 90);
+                Label aboutTitle = AddPageLabel(aboutPage, primaryLabels, "PulseMute Beta", 116, 90);
                 aboutTitle.Font = SettingsDisplayFont(16F, FontStyle.Bold);
                 aboutTitle.SetBounds(116, 90, 390, 32);
                 Label aboutVersion = AddPageState(aboutPage, stateLabels, 116, 126);
                 aboutVersion.SetBounds(116, 126, 390, 22);
-                aboutVersion.Text = "Version 26.1.0.8-stable";
+                aboutVersion.Text = "Version 26.1.0.29-beta";
                 Panel aboutSeparator = AddPageSeparator(aboutPage, separators, 182);
                 Label creatorLabel = AddPageLabel(aboutPage, primaryLabels, "Created by Wrakeeb", 28, 202);
                 Label ownerLabel = AddPageState(aboutPage, stateLabels, 28, 228);
@@ -579,14 +579,14 @@ namespace PulseMute
                     foreach (Button navigationButton in navigationButtons)
                     {
                         bool selected = string.Equals(Convert.ToString(navigationButton.Tag), activePage, StringComparison.OrdinalIgnoreCase);
-                        PulseMuteNavigationButton pulseNavigation = navigationButton as PulseMuteNavigationButton;
-                        if (pulseNavigation != null)
+                        PulseMuteNavigationButton pulseMuteNavigation = navigationButton as PulseMuteNavigationButton;
+                        if (pulseMuteNavigation != null)
                         {
-                            pulseNavigation.Selected = selected;
-                            pulseNavigation.AccentColor = accent;
-                            pulseNavigation.SurfaceColor = surface;
-                            pulseNavigation.NormalTextColor = secondary;
-                            pulseNavigation.Invalidate();
+                            pulseMuteNavigation.Selected = selected;
+                            pulseMuteNavigation.AccentColor = accent;
+                            pulseMuteNavigation.SurfaceColor = surface;
+                            pulseMuteNavigation.NormalTextColor = secondary;
+                            pulseMuteNavigation.Invalidate();
                         }
                     }
 
@@ -1010,14 +1010,14 @@ namespace PulseMute
 
         private static void StyleSidebarActionButton(Button button, Color surface, Color foreground, Color border, bool darkTheme)
         {
-            PulseMuteActionButton pulseButton = button as PulseMuteActionButton;
-            if (pulseButton != null)
+            PulseMuteActionButton pulseMuteButton = button as PulseMuteActionButton;
+            if (pulseMuteButton != null)
             {
-                pulseButton.SurfaceColor = surface;
-                pulseButton.TextColor = foreground;
-                pulseButton.BorderColor = border;
-                pulseButton.HoverColor = darkTheme ? Color.FromArgb(54, 49, 52) : Color.FromArgb(234, 232, 234);
-                pulseButton.Invalidate();
+                pulseMuteButton.SurfaceColor = surface;
+                pulseMuteButton.TextColor = foreground;
+                pulseMuteButton.BorderColor = border;
+                pulseMuteButton.HoverColor = darkTheme ? Color.FromArgb(54, 49, 52) : Color.FromArgb(234, 232, 234);
+                pulseMuteButton.Invalidate();
                 return;
             }
             button.BackColor = surface;

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>PulseMute.ico</ApplicationIcon>
+    <AssemblyName>PulseMute Beta</AssemblyName>
+    <Product>PulseMute Beta</Product>
+    <Version>26.1.0.11-beta</Version>
+    <FileVersion>26.1.0.11</FileVersion>
+    <InformationalVersion>26.1.0.11-beta</InformationalVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="HidSharp" Version="2.6.4" />
+    <Compile Remove="ControllerProtocolTests.cs" />
+    <EmbeddedResource Include="PulseMute-professional.ico" LogicalName="PulseMuteProfessional.ico" />
+  </ItemGroup>
+</Project>

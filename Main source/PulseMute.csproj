@@ -7,11 +7,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>PulseMute.ico</ApplicationIcon>
-    <AssemblyName>PulseMute Main</AssemblyName>
-    <Product>PulseMute Main</Product>
-    <Version>26.1.0.8-stable</Version>
-    <FileVersion>26.1.0.8</FileVersion>
-    <InformationalVersion>26.1.0.8-stable</InformationalVersion>
+    <AssemblyName>PulseMute Beta</AssemblyName>
+    <Product>PulseMute Beta</Product>
+    <Version>26.1.0.29-beta</Version>
+    <FileVersion>26.1.0.29</FileVersion>
+    <InformationalVersion>26.1.0.29-beta</InformationalVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="HidSharp" Version="2.6.4" />

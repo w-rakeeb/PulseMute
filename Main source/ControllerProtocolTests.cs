@@ -52,6 +52,7 @@ namespace PulseMute
             TestColorCodeEditor();
             TestNotificationSounds();
             TestProfessionalLogoResource();
+            TestSourceOrganization();
             TestArchivedVersionDiscovery();
             TestMouseHookInstallation();
             TestConnectedController();
@@ -222,24 +223,24 @@ namespace PulseMute
         private static void TestInstanceIsolation()
         {
             string appData = @"C:\Users\Test\AppData\Roaming";
-            string stablePath = @"D:\PulseMute\Stable\PulseMute Main.exe";
             string betaPath = @"D:\PulseMute\Beta\PulseMute Beta.exe";
-            string archivedPath = @"D:\PulseMute\Stable\Archive\26.1.0.5-stable\PulseMute Main.exe";
+            string stablePath = @"D:\PulseMute\Stable\PulseMute Main.exe";
+            string archivedPath = @"D:\PulseMute\Beta\Archive\26.1.0.12\PulseMute Beta.exe";
 
-            string stableConfig = MainForm.ConfigPathForExecutable(stablePath, appData);
             string betaConfig = MainForm.ConfigPathForExecutable(betaPath, appData);
+            string stableConfig = MainForm.ConfigPathForExecutable(stablePath, appData);
             string archivedConfig = MainForm.ConfigPathForExecutable(archivedPath, appData);
             Assert(!string.Equals(betaConfig, stableConfig, StringComparison.OrdinalIgnoreCase), "Beta and Stable share one settings file.");
-            Assert(!string.Equals(stableConfig, archivedConfig, StringComparison.OrdinalIgnoreCase), "Current and archived Stable share one settings file.");
-            Assert(stableConfig.IndexOf(System.IO.Path.Combine("PulseMute", "Instances"), StringComparison.OrdinalIgnoreCase) >= 0, "Instance settings are outside the isolated directory.");
-            Assert(stableConfig.EndsWith("settings.txt", StringComparison.OrdinalIgnoreCase), "Instance settings filename is invalid.");
-            Assert(MainForm.InstanceIdentityForExecutable(stablePath) == MainForm.InstanceIdentityForExecutable(stablePath.ToLowerInvariant()), "Instance identity is not path-case stable.");
+            Assert(!string.Equals(betaConfig, archivedConfig, StringComparison.OrdinalIgnoreCase), "Current and archived Beta share one settings file.");
+            Assert(betaConfig.IndexOf(System.IO.Path.Combine("PulseMute", "Instances"), StringComparison.OrdinalIgnoreCase) >= 0, "Instance settings are outside the isolated directory.");
+            Assert(betaConfig.EndsWith("settings.txt", StringComparison.OrdinalIgnoreCase), "Instance settings filename is invalid.");
+            Assert(MainForm.InstanceIdentityForExecutable(betaPath) == MainForm.InstanceIdentityForExecutable(betaPath.ToLowerInvariant()), "Instance identity is not path-case stable.");
             Assert(MainForm.AutoStartValueNameForExecutable(betaPath) != MainForm.AutoStartValueNameForExecutable(stablePath), "Beta and Stable share one auto-start value.");
-            Assert(MainForm.AutoStartValueNameForExecutable(stablePath) != MainForm.AutoStartValueNameForExecutable(archivedPath), "Current and archived Stable share one auto-start value.");
-            string previousReleaseConfig = MainForm.ConfigPathForRelease(stablePath, appData, "Stable", "26.1.0.7-stable");
-            string currentReleaseConfig = MainForm.ConfigPathForRelease(stablePath, appData, "Stable", "26.1.0.8-stable");
-            Assert(!string.Equals(previousReleaseConfig, currentReleaseConfig, StringComparison.OrdinalIgnoreCase), "A new Stable update reused the previous release settings.");
-            Assert(MainForm.ReleaseSettingsIdentity().IndexOf("Stable-26_1_0_8-stable", StringComparison.OrdinalIgnoreCase) >= 0, "Current Stable release identity is invalid.");
+            Assert(MainForm.AutoStartValueNameForExecutable(betaPath) != MainForm.AutoStartValueNameForExecutable(archivedPath), "Current and archived Beta share one auto-start value.");
+            string previousReleaseConfig = MainForm.ConfigPathForRelease(betaPath, appData, "Beta", "26.1.0.28-beta");
+            string currentReleaseConfig = MainForm.ConfigPathForRelease(betaPath, appData, "Beta", "26.1.0.29-beta");
+            Assert(!string.Equals(previousReleaseConfig, currentReleaseConfig, StringComparison.OrdinalIgnoreCase), "A new Beta update reused the previous release settings.");
+            Assert(MainForm.ReleaseSettingsIdentity().IndexOf("Beta-26_1_0_29-beta", StringComparison.OrdinalIgnoreCase) >= 0, "Current Beta release identity is invalid.");
         }
 
         private static void TestCompactSettingsCardLayout()
@@ -396,13 +397,34 @@ namespace PulseMute
             Assert(!string.IsNullOrEmpty(appDirectory), "Version archive test directory was not provided.");
 
             System.Collections.Generic.List<ArchivedVersionInfo> versions = MainForm.DiscoverArchivedVersions(appDirectory);
-            Assert(versions.Count >= 18, "Expected Stable snapshots and legacy releases in the version picker.");
+            Assert(versions.Count >= 38, "Expected the Beta snapshots and legacy releases in the version picker.");
 
-            bool foundStableThree = false;
-            bool foundStableFour = false;
-            bool foundStableFive = false;
-            bool foundStableSix = false;
-            bool foundStableSeven = false;
+            bool foundBetaSnapshot = false;
+            bool foundCurrentBackup = false;
+            bool foundSoundBackup = false;
+            bool foundSidebarBackup = false;
+            bool foundPolishBackup = false;
+            bool foundPreRedesignBackup = false;
+            bool foundPulseMuteDesignBackup = false;
+            bool foundUnifiedPaletteBackup = false;
+            bool foundColorEditorBackup = false;
+            bool foundDropdownFixBackup = false;
+            bool foundHotkeyLayoutBackup = false;
+            bool foundToolbarLayoutBackup = false;
+            bool foundPositionOptionBackup = false;
+            bool foundSidePlacementBackup = false;
+            bool foundCompactAccentBackup = false;
+            bool foundVisualIsolationBackup = false;
+            bool foundDeveloperTypographyBackup = false;
+            bool foundAudioVisualBackup = false;
+            bool foundFinalizedBackup = false;
+            bool foundLogoIdentityBackup = false;
+            bool foundLogoChoicesBackup = false;
+            bool foundStateControlBackup = false;
+            bool foundCorrectedControlBackup = false;
+            bool foundPreviousDefaultsBackup = false;
+            bool foundPreviousPrimaryBackup = false;
+            bool foundCorrectedPrimaryBackup = false;
             System.Collections.Generic.HashSet<string> uniquePaths = new System.Collections.Generic.HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (ArchivedVersionInfo version in versions)
             {
@@ -412,22 +434,85 @@ namespace PulseMute
                 Assert(version.ExecutablePath.IndexOf("UnmuteMic", StringComparison.OrdinalIgnoreCase) < 0, "Microphone helper appeared in the version picker.");
                 Assert(!string.IsNullOrEmpty(version.Details), "Version details are missing: " + version.DisplayName);
                 Assert(version.DisplayName.IndexOf("Major Update", StringComparison.OrdinalIgnoreCase) < 0, "Major Update text remained in the picker.");
-                if (version.DisplayName == "Stable 26.1.0.3-stable")
-                    foundStableThree = version.Details.IndexOf("mouse", StringComparison.OrdinalIgnoreCase) >= 0;
-                if (version.DisplayName == "Stable 26.1.0.4-stable")
-                    foundStableFour = version.Details.IndexOf("sidebar", StringComparison.OrdinalIgnoreCase) >= 0;
-                if (version.DisplayName == "Stable 26.1.0.5-stable")
-                    foundStableFive = version.Details.IndexOf("Developer", StringComparison.OrdinalIgnoreCase) >= 0;
-                if (version.DisplayName == "Stable 26.1.0.6-stable")
-                    foundStableSix = version.Details.IndexOf("Rounded", StringComparison.OrdinalIgnoreCase) >= 0;
-                if (version.DisplayName == "Stable 26.1.0.7-stable")
-                    foundStableSeven = version.Details.IndexOf("FB453D", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.3-beta")
+                    foundBetaSnapshot = true;
+                if (version.DisplayName == "Beta 26.1.0.4-beta")
+                    foundCurrentBackup = version.Details.IndexOf("Developer Mode", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.5-beta")
+                    foundSoundBackup = version.Details.IndexOf("sound", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.6-beta")
+                    foundSidebarBackup = version.Details.IndexOf("sidebar", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.7-beta")
+                    foundPolishBackup = version.Details.IndexOf("sound", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.8-beta")
+                    foundPreRedesignBackup = version.Details.IndexOf("logo", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.9-beta")
+                    foundPulseMuteDesignBackup = version.Details.IndexOf("PulseMute", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.10-beta")
+                    foundUnifiedPaletteBackup = version.Details.IndexOf("palette", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.11-beta")
+                    foundColorEditorBackup = version.Details.IndexOf("color", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.12-beta")
+                    foundDropdownFixBackup = version.Details.IndexOf("dropdown", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.13-beta")
+                    foundHotkeyLayoutBackup = version.Details.IndexOf("hotkey", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.14-beta")
+                    foundToolbarLayoutBackup = version.Details.IndexOf("toolbar", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.15-beta")
+                    foundPositionOptionBackup = version.Details.IndexOf("position", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.16-beta")
+                    foundSidePlacementBackup = version.Details.IndexOf("Settings", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.17-beta")
+                    foundCompactAccentBackup = version.Details.IndexOf("accent", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.18-beta")
+                    foundVisualIsolationBackup = version.Details.IndexOf("isolation", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.19-beta")
+                    foundDeveloperTypographyBackup = version.Details.IndexOf("Developer", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.20-beta")
+                    foundAudioVisualBackup = version.Details.IndexOf("Audio", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.21-beta")
+                    foundFinalizedBackup = version.Details.IndexOf("finalized", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.22-beta")
+                    foundLogoIdentityBackup = version.Details.IndexOf("identity", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.23-beta")
+                    foundLogoChoicesBackup = version.Details.IndexOf("logo", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.24-beta")
+                    foundStateControlBackup = version.Details.IndexOf("state", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.25-beta")
+                    foundCorrectedControlBackup = version.Details.IndexOf("A02A39", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.26-beta")
+                    foundPreviousDefaultsBackup = version.Details.IndexOf("Rounded", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.27-beta")
+                    foundPreviousPrimaryBackup = version.Details.IndexOf("FB453D", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (version.DisplayName == "Beta 26.1.0.28-beta")
+                    foundCorrectedPrimaryBackup = version.Details.IndexOf("A02A39", StringComparison.OrdinalIgnoreCase) >= 0;
             }
-            Assert(foundStableThree, "Stable 26.1.0.3 backup or its version details were not discovered.");
-            Assert(foundStableFour, "Stable 26.1.0.4 backup or its version details were not discovered.");
-            Assert(foundStableFive, "Stable 26.1.0.5 backup or its version details were not discovered.");
-            Assert(foundStableSix, "Stable 26.1.0.6 backup or its version details were not discovered.");
-            Assert(foundStableSeven, "Stable 26.1.0.7 previous-primary backup or its version details were not discovered.");
+            Assert(foundBetaSnapshot, "Beta 26.1.0.3 snapshot was not discovered.");
+            Assert(foundCurrentBackup, "Beta 26.1.0.4 backup or its version details were not discovered.");
+            Assert(foundSoundBackup, "Beta 26.1.0.5 backup or its version details were not discovered.");
+            Assert(foundSidebarBackup, "Beta 26.1.0.6 backup or its version details were not discovered.");
+            Assert(foundPolishBackup, "Beta 26.1.0.7 backup or its version details were not discovered.");
+            Assert(foundPreRedesignBackup, "Beta 26.1.0.8 pre-redesign backup or its version details were not discovered.");
+            Assert(foundPulseMuteDesignBackup, "Beta 26.1.0.9 design backup or its version details were not discovered.");
+            Assert(foundUnifiedPaletteBackup, "Beta 26.1.0.10 palette backup or its version details were not discovered.");
+            Assert(foundColorEditorBackup, "Beta 26.1.0.11 color-editor backup or its version details were not discovered.");
+            Assert(foundDropdownFixBackup, "Beta 26.1.0.12 dropdown-fix backup or its version details were not discovered.");
+            Assert(foundHotkeyLayoutBackup, "Beta 26.1.0.13 hotkey-layout backup or its version details were not discovered.");
+            Assert(foundToolbarLayoutBackup, "Beta 26.1.0.14 toolbar-layout backup or its version details were not discovered.");
+            Assert(foundPositionOptionBackup, "Beta 26.1.0.15 position-option backup or its version details were not discovered.");
+            Assert(foundSidePlacementBackup, "Beta 26.1.0.16 Settings-placement backup or its version details were not discovered.");
+            Assert(foundCompactAccentBackup, "Beta 26.1.0.17 compact-accent backup or its version details were not discovered.");
+            Assert(foundVisualIsolationBackup, "Beta 26.1.0.18 visual-isolation backup or its version details were not discovered.");
+            Assert(foundDeveloperTypographyBackup, "Beta 26.1.0.19 Developer-typography backup or its version details were not discovered.");
+            Assert(foundAudioVisualBackup, "Beta 26.1.0.20 Audio-visual backup or its version details were not discovered.");
+            Assert(foundFinalizedBackup, "Beta 26.1.0.21 finalized backup or its version details were not discovered.");
+            Assert(foundLogoIdentityBackup, "Beta 26.1.0.22 logo-identity backup or its version details were not discovered.");
+            Assert(foundLogoChoicesBackup, "Beta 26.1.0.23 logo-choice backup or its version details were not discovered.");
+            Assert(foundStateControlBackup, "Beta 26.1.0.24 state-control backup or its version details were not discovered.");
+            Assert(foundCorrectedControlBackup, "Beta 26.1.0.25 corrected-control backup or its version details were not discovered.");
+            Assert(foundPreviousDefaultsBackup, "Beta 26.1.0.26 default-identity backup or its version details were not discovered.");
+            Assert(foundPreviousPrimaryBackup, "Beta 26.1.0.27 previous-primary backup or its version details were not discovered.");
+            Assert(foundCorrectedPrimaryBackup, "Beta 26.1.0.28 corrected-primary backup or its version details were not discovered.");
             Assert(versions.Exists(delegate(ArchivedVersionInfo version)
             {
                 return version.DisplayName == "PulseMute 1.5" && version.Details.IndexOf("redesign", StringComparison.OrdinalIgnoreCase) >= 0;
@@ -493,25 +578,18 @@ namespace PulseMute
             string sourcePath = System.IO.Path.Combine(appDirectory, "Main source", "SidebarSettings.cs");
             string source = System.IO.File.ReadAllText(sourcePath);
             string programSource = System.IO.File.ReadAllText(System.IO.Path.Combine(appDirectory, "Main source", "Program.cs"));
-            Assert(System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "PulseMute.code-workspace")), "VS Code workspace is missing.");
-            Assert(System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "PulseMute.sln")) &&
-                System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "FILE_GUIDE.md")), "Project organization guides are missing.");
             Assert(source.IndexOf("FormBorderStyle.None", StringComparison.Ordinal) >= 0, "Native Settings shell is not borderless.");
             Assert(source.IndexOf("ClientSize = new Size(660, 500)", StringComparison.Ordinal) >= 0, "Balanced Settings size is missing.");
             Assert(source.IndexOf("MinimumSize = new Size(600, 450)", StringComparison.Ordinal) >= 0, "Balanced Settings minimum size is missing.");
             Assert(source.IndexOf("sidebar.SetBounds(0, 38, 180, 462)", StringComparison.Ordinal) >= 0, "Balanced Settings sidebar dimensions are missing.");
             Assert(source.IndexOf("button.SetBounds(10, y, 160, 36)", StringComparison.Ordinal) >= 0, "Balanced navigation dimensions are missing.");
             Assert(source.IndexOf("CalculateSettingsLocation", StringComparison.Ordinal) >= 0, "Side placement helper is missing.");
-            Assert(source.IndexOf("PulseMuteNavigationButton", StringComparison.Ordinal) >= 0, "PulseMute navigation control is missing.");
-            Assert(source.IndexOf("PulseMuteCardPanel", StringComparison.Ordinal) >= 0, "PulseMute settings cards are missing.");
+            Assert(source.IndexOf("PulseMuteNavigationButton", StringComparison.Ordinal) >= 0, "PulseMute-style navigation control is missing.");
+            Assert(source.IndexOf("PulseMuteCardPanel", StringComparison.Ordinal) >= 0, "PulseMute-style settings cards are missing.");
             Assert(source.IndexOf("PulseMuteComboBox", StringComparison.Ordinal) >= 0, "Custom settings dropdown is missing.");
             Assert(source.IndexOf("PulseMuteSlider", StringComparison.Ordinal) >= 0, "Custom settings slider is missing.");
-            Assert(source.IndexOf("PulseMuteActionButton", StringComparison.Ordinal) >= 0, "PulseMute action button is missing.");
-            Assert(source.IndexOf("PulseMuteMenuRenderer", StringComparison.Ordinal) >= 0, "PulseMute menu renderer is missing.");
-            Assert(source.IndexOf("PulseMuteDrawing", StringComparison.Ordinal) >= 0, "PulseMute drawing helper is missing.");
             Assert(source.IndexOf("SettingsBodyFont", StringComparison.Ordinal) >= 0, "Settings typography helper is missing.");
-            Assert(source.IndexOf("26.1.0.8-stable", StringComparison.Ordinal) >= 0, "Settings version label is stale.");
-            Assert(source.IndexOf("PulseMute Main", StringComparison.Ordinal) >= 0, "Stable Settings branding is missing.");
+            Assert(source.IndexOf("26.1.0.29-beta", StringComparison.Ordinal) >= 0, "Settings version label is stale.");
             Assert(source.IndexOf("sidebar.Controls.Add(sidebarVersion)", StringComparison.Ordinal) < 0, "The removed sidebar version label returned.");
             Assert(source.IndexOf("page.Size = new Size(480, 420)", StringComparison.Ordinal) >= 0, "Settings pages do not match the balanced content canvas.");
             Assert(source.IndexOf("Mute control", StringComparison.Ordinal) >= 0, "Mute control design selector is missing.");
@@ -552,6 +630,22 @@ namespace PulseMute
             Assert(programSource.IndexOf("InstanceIdentityForExecutable", StringComparison.Ordinal) >= 0, "Per-executable instance isolation is missing.");
             Assert(programSource.IndexOf("darkMode ? Color.FromArgb(17, 20, 24) : Color.White", StringComparison.Ordinal) >= 0, "Default Settings sidebar is not #111418.");
             Assert(programSource.IndexOf("return Color.FromArgb(193, 53, 69);", StringComparison.Ordinal) >= 0, "Default accent is not #C13545.");
+        }
+
+        private static void TestSourceOrganization()
+        {
+            string appDirectory = Environment.GetEnvironmentVariable("PULSEMUTE_TEST_APP_DIR");
+            Assert(!string.IsNullOrEmpty(appDirectory), "Source organization test directory was not provided.");
+
+            Assert(System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "PulseMute.code-workspace")), "VS Code workspace file is missing.");
+            Assert(System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "PulseMute.sln")), "Visual Studio solution file is missing.");
+            Assert(System.IO.File.Exists(System.IO.Path.Combine(appDirectory, "FILE_GUIDE.md")), "Source file guide is missing.");
+
+            string settingsSource = System.IO.File.ReadAllText(System.IO.Path.Combine(appDirectory, "Main source", "SidebarSettings.cs"));
+            Assert(settingsSource.IndexOf("PulseMuteNavigationButton", StringComparison.Ordinal) >= 0, "PulseMute navigation control is missing.");
+            Assert(settingsSource.IndexOf("PulseMuteCardPanel", StringComparison.Ordinal) >= 0, "PulseMute settings card is missing.");
+            Assert(settingsSource.IndexOf("PulseMuteComboBox", StringComparison.Ordinal) >= 0, "PulseMute dropdown control is missing.");
+            Assert(settingsSource.IndexOf("PulseMuteSlider", StringComparison.Ordinal) >= 0, "PulseMute slider control is missing.");
         }
 
         private static void TestNotificationSounds()

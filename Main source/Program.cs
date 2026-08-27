@@ -96,8 +96,8 @@ namespace PulseMute
 
     internal sealed partial class MainForm : Form
     {
-        private const string ReleaseChannel = "Stable";
-        private const string ReleaseVersion = "26.1.0.8-stable";
+        private const string ReleaseChannel = "Beta";
+        private const string ReleaseVersion = "26.1.0.29-beta";
         private static readonly int DesignVariant = 0;
         private const int WhKeyboardLl = 13;
         private const int WhMouseLl = 14;
@@ -179,7 +179,7 @@ namespace PulseMute
             mouseProc = MouseHookCallback;
             appIcon = LoadAppIcon(logoStyle);
 
-            Text = "PulseMute Main";
+            Text = "PulseMute Beta";
             Icon = appIcon;
             Width = 300;
             Height = 380;
@@ -198,7 +198,7 @@ namespace PulseMute
             ConfigureEditionWindow();
 
             titleLabel = new Label();
-            titleLabel.Text = "PulseMute Main";
+            titleLabel.Text = "PulseMute Beta";
             titleLabel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             titleLabel.AutoSize = false;
             titleLabel.AutoEllipsis = true;
@@ -360,7 +360,7 @@ namespace PulseMute
             menu.Items.Add("Exit", null, delegate { Close(); });
 
             tray = new NotifyIcon();
-            tray.Text = "PulseMute Main";
+            tray.Text = "PulseMute Beta";
             tray.Icon = appIcon;
             tray.ContextMenuStrip = menu;
             tray.Visible = true;
@@ -752,7 +752,7 @@ namespace PulseMute
         {
             using (Form dialog = new Form())
             {
-                dialog.Text = "PulseMute Main settings";
+                dialog.Text = "PulseMute Beta settings";
                 dialog.ClientSize = new Size(390, 460);
                 dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
                 dialog.MaximizeBox = false;
@@ -1646,7 +1646,7 @@ namespace PulseMute
                 return "PulseMute 1.5.2 Signal";
             if (DesignVariant == 3)
                 return "PulseMute 1.5.3 Console";
-            return "PulseMute Main " + ReleaseVersion;
+            return "PulseMute Beta " + ReleaseVersion;
         }
 
         private static Label CreateSettingsStateLabel(int x, int y)
@@ -1693,7 +1693,7 @@ namespace PulseMute
         {
             using (Form dialog = new Form())
             {
-                dialog.Text = "PulseMute Main settings";
+                dialog.Text = "PulseMute Beta settings";
                 dialog.ClientSize = new Size(380, 330);
                 dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
                 dialog.MaximizeBox = false;
@@ -1984,7 +1984,7 @@ namespace PulseMute
                 toggleButton.SecondaryColor = muted ? Color.FromArgb(117, 35, 48) : Color.FromArgb(21, 91, 83);
                 toggleButton.Invalidate();
                 tray.Icon = appIcon;
-                tray.Text = muted ? "PulseMute Main - muted" : "PulseMute Main - live";
+                tray.Text = muted ? "PulseMute Beta - muted" : "PulseMute Beta - live";
             }
             catch (Exception ex)
             {
@@ -1995,7 +1995,7 @@ namespace PulseMute
                 toggleButton.SecondaryColor = Color.FromArgb(132, 86, 37);
                 deviceLabel.Text = ex.Message;
                 tray.Icon = appIcon;
-                tray.Text = "PulseMute Main - microphone unavailable";
+                tray.Text = "PulseMute Beta - microphone unavailable";
             }
         }
 
@@ -2003,7 +2003,7 @@ namespace PulseMute
         {
             Hide();
             WindowState = FormWindowState.Normal;
-            tray.ShowBalloonTip(900, "PulseMute Main", "Listening for " + CurrentShortcutText(1) + " or " + CurrentShortcutText(2) + ".", ToolTipIcon.Info);
+            tray.ShowBalloonTip(900, "PulseMute Beta", "Listening for " + CurrentShortcutText(1) + " or " + CurrentShortcutText(2) + ".", ToolTipIcon.Info);
         }
 
         private void ShowFromTray()
@@ -2875,7 +2875,6 @@ namespace PulseMute
                     foreach (string valueName in key.GetValueNames())
                     {
                         bool pulseMuteEntry = string.Equals(valueName, "PulseMuteBetaAutoStart", StringComparison.OrdinalIgnoreCase) ||
-                            string.Equals(valueName, "PulseMuteMainAutoStart", StringComparison.OrdinalIgnoreCase) ||
                             valueName.StartsWith("PulseMuteAutoStart-", StringComparison.OrdinalIgnoreCase);
                         if (!pulseMuteEntry || string.Equals(valueName, currentValueName, StringComparison.OrdinalIgnoreCase))
                             continue;
@@ -2901,12 +2900,15 @@ namespace PulseMute
             List<ArchivedVersionInfo> versions = new List<ArchivedVersionInfo>();
             HashSet<string> seenPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            string channelArchive = Path.Combine(startupPath, "Main source", "Version Archive");
-            AddArchivedVersionFolders(channelArchive, ReleaseChannel + " ", versions, seenPaths);
+            string betaArchive = Path.Combine(startupPath, "Main source", "Version Archive");
+            AddArchivedVersionFolders(betaArchive, "Beta ", versions, seenPaths);
 
             string projectRoot = Path.GetFullPath(Path.Combine(startupPath, "..", ".."));
             string legacyArchive = Path.Combine(projectRoot, "PulseMute older Versions");
             AddArchivedVersionFolders(legacyArchive, string.Empty, versions, seenPaths);
+
+            string bundledLegacyArchive = Path.Combine(startupPath, "Legacy Versions");
+            AddArchivedVersionFolders(bundledLegacyArchive, string.Empty, versions, seenPaths);
 
             versions.Sort(delegate(ArchivedVersionInfo left, ArchivedVersionInfo right)
             {
@@ -2967,18 +2969,13 @@ namespace PulseMute
             if (name == "PulseMute PS 1.0") return "Added full DualSense and DualSense Edge button support.";
             if (name == "PulseMute PS 1.1") return "Added two independent keyboard or PlayStation hotkey slots.";
             if (name == "PulseMute Test 26.1.0.2-test Source") return "Added Mouse 1-5 and vertical or horizontal wheel hotkeys.";
-            if (name == "Stable 26.1.0.3-stable") return "Added full mouse hotkeys, Dual Hotkey mode, and compact responsive controls.";
-            if (name == "Stable 26.1.0.4-stable") return "Added the sidebar Settings interface, audio feedback, logo, and legacy fallback.";
-            if (name == "Stable 26.1.0.5-stable") return "Promoted the complete Developer Mode and finalized Beta feature set to Stable.";
-            if (name == "Stable 26.1.0.6-stable") return "Added logo customization and made Rounded square and Red/green mic the defaults.";
-            if (name == "Stable 26.1.0.7-stable") return "Applied the supplied #FB453D circular microphone identity across the app.";
             if (name == "Beta 26.1.0.3-beta") return "Added compact hotkey cards, Dual Hotkey mode, and improved scaling.";
             if (name == "Beta 26.1.0.4-beta") return "Added Developer Mode, archived-version switching, and compact release information.";
             if (name == "Beta 26.1.0.5-beta") return "Added selectable mute and unmute sound feedback with four built-in styles.";
             if (name == "Beta 26.1.0.6-beta") return "Introduced responsive sidebar Settings with focused category pages.";
             if (name == "Beta 26.1.0.7-beta") return "Expanded sound feedback, volume control, animations, and professional logo preview.";
             if (name == "Beta 26.1.0.8-beta") return "Promoted the professional logo, removed rounded-control experiments, and hardened sidebar Settings.";
-            if (name == "Beta 26.1.0.9-beta") return "Redesigned Settings with PulseMute navigation, cards, controls, and animation.";
+            if (name == "Beta 26.1.0.9-beta") return "Redesigned native Settings with PulseMute-owned navigation, cards, controls, and animation.";
             if (name == "Beta 26.1.0.10-beta") return "Unified front and Settings palettes with customizable Settings sidebar and border colors.";
             if (name == "Beta 26.1.0.11-beta") return "Added a themed HEX and RGB color editor with copy, paste, presets, and live preview.";
             if (name == "Beta 26.1.0.12-beta") return "Fixed custom dropdown menu lifetime and the disposed ContextMenuStrip error.";
@@ -2995,6 +2992,9 @@ namespace PulseMute
             if (name == "Beta 26.1.0.23-beta") return "Added four persistent app-logo choices with immediate window, tray, Settings, and About updates.";
             if (name == "Beta 26.1.0.24-beta") return "Added the supplied red/green state-aware microphone mute control.";
             if (name == "Beta 26.1.0.25-beta") return "Corrected the muted-state control background to #A02A39.";
+            if (name == "Beta 26.1.0.26-beta") return "Made Rounded square and Red/green mic the default interface identity.";
+            if (name == "Beta 26.1.0.27-beta") return "Applied the supplied #FB453D circular microphone identity across the app.";
+            if (name == "Beta 26.1.0.28-beta") return "Corrected the primary identity to the supplied #A02A39 circular microphone artwork.";
             return "Archived PulseMute release.";
         }
 
