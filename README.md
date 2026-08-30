@@ -6,6 +6,24 @@ Owner: [w-rakeeb](https://github.com/w-rakeeb) / Ra Kib
 
 PulseMute Beta 26.1.0.29-beta is the active development and validation channel.
 
+## Screenshots
+
+| Main window | General settings |
+| --- | --- |
+| ![PulseMute main window](Screenshots/main-window.png) | ![PulseMute General settings](Screenshots/settings-general.png) |
+
+| Hotkeys | Audio |
+| --- | --- |
+| ![PulseMute Hotkeys settings](Screenshots/settings-hotkeys.png) | ![PulseMute Audio settings](Screenshots/settings-audio.png) |
+
+| Controller | Customization |
+| --- | --- |
+| ![PulseMute Controller settings](Screenshots/settings-controller.png) | ![PulseMute Customization settings](Screenshots/settings-customization.png) |
+
+| Developer | About |
+| --- | --- |
+| ![PulseMute Developer settings](Screenshots/settings-developer.png) | ![PulseMute About page](Screenshots/settings-about.png) |
+
 ## Features
 
 - Toggle the default Windows communication microphone.
