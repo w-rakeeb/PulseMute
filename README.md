@@ -4,7 +4,7 @@ PulseMute is a compact Windows microphone mute utility created by **Wrakeeb**.
 
 Current release: `26.1.0.9-stable`
 
-[Website](https://pulsemute-2.vercel.app) | [Owner](https://github.com/w-rakeeb)
+[Website](https://pulsemute-wrakeeb.vercel.app) | [Owner](https://github.com/w-rakeeb)
 
 ## Download
 
