@@ -1,6 +1,10 @@
-Main source/bin/
-Main source/obj/
-Main source/dist/
+Source/bin/
+Source/obj/
+Source/dist/
+node_modules/
+dist/
+.vercel/
+.env.local
 *.user
 *.suo
 .vs/

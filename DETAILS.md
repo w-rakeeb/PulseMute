@@ -1,16 +1,18 @@
-# PulseMute Beta 26.1.0.29-beta
+# PulseMute 26.1.0.9-stable
 
 Owner: Wrakeeb (`w-rakeeb`)
 
-## Beta baseline
+## Stable release
 
 - Based on PulseMute PS 1.1.
-- Validation channel for promoted Test features.
+- Daily-use channel containing the promoted and validated Beta feature set.
 - Supports keyboard, PlayStation controller, and mouse hotkeys.
+- Handles missing or disconnected microphones without exception popups.
+- Shows `No microphone detected` and recovers automatically when an input becomes available.
 - Includes compact clickable hotkey cards and optional Dual Hotkey mode.
 - Includes opt-in Developer Settings with an archived-version launcher.
 - Includes optional mute/unmute sound feedback with nine selectable styles and volume control.
-- Uses a PulseMute-owned frameless Settings shell with compact icon navigation.
+- Uses a custom PulseMute frameless Settings shell with compact icon navigation.
 - Uses Inter typography, neutral surfaces, card rows, and PulseMute red accents.
 - Includes eased page transitions and animated toggles with an optional animation disable switch.
 - Uses custom-painted dropdowns, sliders, navigation, cards, and command buttons.
@@ -36,7 +38,7 @@ Owner: Wrakeeb (`w-rakeeb`)
 - Uses Segoe UI Variable typography when available for clearer DPI-scaled text.
 - Restores the preferred `26.1.0.19-beta` mute-control designs.
 - Keeps Audio dropdowns, volume controls, and actions inside fully padded cards.
-- Uses the supplied red muted-microphone artwork as the main Beta logo.
+- Uses the supplied muted-microphone artwork across the application.
 - Uses matching multi-resolution application, taskbar, window, tray, and About icons.
 - Offers four persistent logo styles in Customization: Muted circle, Long shadow, Rounded square, and Outline mic.
 - Uses the corrected supplied `#A02A39` circular muted-microphone artwork as the default logo and Windows executable icon.
@@ -47,6 +49,6 @@ Owner: Wrakeeb (`w-rakeeb`)
 
 ## Layout
 
-- `PulseMute Beta.exe` is the standalone main app.
-- Editable and supporting files are stored in `Main source`.
+- `PulseMute.exe` is the standalone Stable app.
+- Editable and supporting files are stored in `Source`.
 - Includes repeatable controller protocol and hardware smoke tests.
