@@ -29,6 +29,7 @@
 
 ## Supporting files
 
+- `Logo/PulseMute Muted.svg` and `Logo/PulseMute Unmute.svg` are the correctly named master vector logos.
 - `Source/Dependencies` contains HidSharp and its license.
 - `Source/*.png`, `*.svg`, and `*.ico` contain app artwork.
 - `Updates` contains Stable release notes.

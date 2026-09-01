@@ -66,6 +66,15 @@ Important files:
 
 See [`FILE_GUIDE.md`](FILE_GUIDE.md) for a beginner-friendly project map.
 
+## Logo artwork
+
+The original scalable vector artwork is stored in [`Logo`](Logo):
+
+- `PulseMute Muted.svg` - red muted microphone identity and main app logo.
+- `PulseMute Unmute.svg` - green live-microphone state artwork.
+
+SVG means Scalable Vector Graphics. These master files remain sharp at any size and are used to generate the PNG and Windows ICO assets bundled with the app.
+
 ## Build
 
 ### PowerShell

@@ -39,6 +39,7 @@ Owner: Wrakeeb (`w-rakeeb`)
 - Restores the preferred `26.1.0.19-beta` mute-control designs.
 - Keeps Audio dropdowns, volume controls, and actions inside fully padded cards.
 - Uses the supplied muted-microphone artwork across the application.
+- Uses the correctly named `PulseMute Muted.svg` and `PulseMute Unmute.svg` master artwork from the project logo library.
 - Uses matching multi-resolution application, taskbar, window, tray, and About icons.
 - Offers four persistent logo styles in Customization: Muted circle, Long shadow, Rounded square, and Outline mic.
 - Uses the corrected supplied `#A02A39` circular muted-microphone artwork as the default logo and Windows executable icon.

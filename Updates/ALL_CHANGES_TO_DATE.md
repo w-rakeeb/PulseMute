@@ -49,8 +49,11 @@ Channel: Stable daily-use build
 
 ## Now
 
-- PulseMute Main now uses the corrected `#A02A39` circular muted-microphone identity everywhere, defaults to Red/green mic, and retains Stable-specific identity and clean settings.
+- PulseMute uses the correctly named `PulseMute Muted.svg` and `PulseMute Unmute.svg` master artwork.
 - Preserved `26.1.0.8-stable` as a complete rollback release.
 - Replaced raw missing-device exception dialogs with a quiet `No microphone detected` state.
 - Added automatic fallback to the Windows default input when a saved microphone is disconnected.
 - Mute clicks and hotkeys remain silent while no capture device exists, then recover automatically when one appears.
+- Published `26.1.0.9-stable` as `PulseMute.exe` with complete app and website source.
+- Connected GitHub `main` to automatic Vercel production deployment.
+- Kept the local PulseMute Main channel separate from public-release branding.
