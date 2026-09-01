@@ -1,13 +1,13 @@
-.git
-Legacy Versions
-Screenshots
-Source
-Updates
+/.git
+/Legacy Versions
+/Screenshots
+/Source
+/Updates
 /PulseMute.exe
-PulseMute.sln
-PulseMute.code-workspace
-DETAILS.md
-FILE_GUIDE.md
-LICENSE
-README.md
-THIRD_PARTY_NOTICES.md
+/PulseMute.sln
+/PulseMute.code-workspace
+/DETAILS.md
+/FILE_GUIDE.md
+/LICENSE
+/README.md
+/THIRD_PARTY_NOTICES.md
